@@ -1,0 +1,60 @@
+@import "tailwindcss";
+
+:root {
+  --color-background: #08090B;
+  --color-background-alt: #0D0E11;
+  --color-surface: #121418;
+  --color-surface-elevated: #191C21;
+
+  --color-text: #F4F4F5;
+  --color-text-secondary: #A1A1AA;
+  --color-text-muted: #777982;
+
+  --color-border: #27292F;
+  --color-border-strong: #363841;
+
+  --color-accent: #C41E3A;
+  --color-accent-hover: #E02A46;
+  --color-accent-deep: #5A0C1E;
+
+  --color-wave-primary: #D8D9DE;
+  --color-wave-secondary: #8A8D96;
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  overflow-x: hidden;
+}
+
+/* Custom scrollbar for dark aesthetic */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #08090B;
+}
+::-webkit-scrollbar-thumb {
+  background: #27292F;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #363841;
+}
+
+/* Smooth focus rings */
+*:focus-visible {
+  outline: 2px solid #C41E3A;
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
