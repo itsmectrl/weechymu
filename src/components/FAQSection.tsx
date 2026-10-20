@@ -1,5 +1,5 @@
 import React, { useState, useId } from 'react';
-import { HelpCircle, ChevronDown, Search } from 'lucide-react';
+import { ChevronDown, Search } from 'lucide-react';
 import { FAQ_ITEMS } from '../config/site';
 import { Language } from '../types';
 
@@ -9,7 +9,7 @@ interface FAQSectionProps {
 
 export const FAQSection: React.FC<FAQSectionProps> = ({ currentLang }) => {
   const isAr = currentLang === 'ar';
-  const [openIds, setOpenIds] = useState<string[]>(['faq-1', 'faq-2']);
+  const [openIds, setOpenIds] = useState<string[]>(['faq-1']);
   const [searchTerm, setSearchTerm] = useState('');
   const [activeCategory, setActiveCategory] = useState<string>('all');
   const baseId = useId();
@@ -33,38 +33,37 @@ export const FAQSection: React.FC<FAQSectionProps> = ({ currentLang }) => {
   });
 
   return (
-    <section id="faq" className="py-24 px-4 sm:px-6 lg:px-8 bg-[#0D0E11] border-t border-[#27292F] relative">
-      <div className="max-w-4xl mx-auto">
+    <section id="faq" className="py-24 px-4 sm:px-6 lg:px-8 bg-[#0A0A0C] border-t border-[#242428] relative">
+      <div className="max-w-3xl mx-auto">
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-12">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#121418] border border-[#27292F] text-xs font-mono text-[#D8D9DE] mb-3">
-            <HelpCircle className="w-3.5 h-3.5 text-[#C41E3A]" />
-            <span>{isAr ? 'الأسئلة الشائعة' : 'Clear & Transparent Answers'}</span>
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#111114] border border-[#242428] text-[11px] font-mono text-[#929299] mb-4">
+            <span>{isAr ? 'الأسئلة الشائعة' : 'Frequently Asked Questions'}</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-[#F4F4F5] mb-4">
-            {isAr ? 'كل ما تود معرفته عن ويتشي' : 'Frequently Asked Questions'}
+          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-[#F5F5F7] mb-4">
+            {isAr ? 'كل ما تود معرفته عن ويتشي' : 'Direct Facts & Answers'}
           </h2>
-          <p className="text-sm text-[#A1A1AA] leading-relaxed">
+          <p className="text-sm text-[#929299] leading-relaxed">
             {isAr
               ? 'إجابات واضحة وحقيقية على الأسئلة التقنية والتشغيلية دون وعود تسويقية زائفة.'
-              : 'Direct facts regarding playback mechanics, lyrics synchronization, format decoders, and privacy.'}
+              : 'Direct details regarding playback mechanics, lyrics synchronization, format decoders, and privacy.'}
           </p>
         </div>
 
         {/* Search & Category Filter */}
         <div className="space-y-4 mb-10">
           <div className="relative max-w-md mx-auto">
-            <Search className="w-4 h-4 text-[#777982] absolute left-3.5 top-1/2 -translate-y-1/2" />
+            <Search className="w-4 h-4 text-[#66666E] absolute left-3.5 top-1/2 -translate-y-1/2" />
             <input
               type="text"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               placeholder={isAr ? 'ابحث في الأسئلة الشائعة...' : 'Search questions or topics...'}
-              className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-[#121418] border border-[#27292F] focus:border-[#C41E3A] text-xs sm:text-sm text-[#F4F4F5] placeholder-[#777982] focus:outline-none focus:ring-1 focus:ring-[#C41E3A]"
+              className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-[#111114] border border-[#242428] focus:border-[#B91C35] text-xs sm:text-sm text-[#F5F5F7] placeholder-[#66666E] focus:outline-none transition-colors"
             />
           </div>
 
-          <div className="flex flex-wrap items-center justify-center gap-2 text-xs">
+          <div className="flex flex-wrap items-center justify-center gap-1.5 text-xs">
             {[
               { id: 'all', en: 'All Topics', ar: 'الكل' },
               { id: 'general', en: 'General', ar: 'عام' },
@@ -76,10 +75,10 @@ export const FAQSection: React.FC<FAQSectionProps> = ({ currentLang }) => {
               <button
                 key={cat.id}
                 onClick={() => setActiveCategory(cat.id)}
-                className={`px-3 py-1.5 rounded-lg font-medium transition-colors border ${
+                className={`px-3 py-1 rounded-lg text-xs font-medium transition-colors border ${
                   activeCategory === cat.id
-                    ? 'bg-[#191C21] text-white border-[#C41E3A]'
-                    : 'bg-[#121418] text-[#777982] hover:text-[#A1A1AA] border-[#27292F]'
+                    ? 'bg-[#16161A] text-white border-[#2F2F35]'
+                    : 'bg-[#111114] text-[#66666E] hover:text-[#929299] border-[#242428]'
                 }`}
               >
                 {isAr ? cat.ar : cat.en}
@@ -89,7 +88,7 @@ export const FAQSection: React.FC<FAQSectionProps> = ({ currentLang }) => {
         </div>
 
         {/* Accordion List */}
-        <div className="space-y-3">
+        <div className="space-y-2.5">
           {filteredItems.map((item, index) => {
             const isOpen = openIds.includes(item.id);
             const questionText = isAr ? item.questionAr : item.questionEn;
@@ -100,21 +99,21 @@ export const FAQSection: React.FC<FAQSectionProps> = ({ currentLang }) => {
             return (
               <div
                 key={item.id}
-                className="rounded-2xl bg-[#121418] border border-[#27292F] overflow-hidden transition-colors hover:border-[#363841]"
+                className="rounded-xl bg-[#111114] border border-[#242428] overflow-hidden transition-colors"
               >
                 <button
                   id={headerId}
                   onClick={() => toggleItem(item.id)}
                   aria-expanded={isOpen}
                   aria-controls={contentId}
-                  className="w-full flex items-center justify-between p-5 text-left gap-4 focus:outline-none focus-visible:ring-1 focus-visible:ring-[#C41E3A]"
+                  className="w-full flex items-center justify-between p-4 sm:p-5 text-left gap-4 focus:outline-none"
                 >
-                  <span className="text-sm sm:text-base font-semibold text-[#F4F4F5] leading-snug">
+                  <span className="text-xs sm:text-sm font-semibold text-[#F5F5F7] leading-snug">
                     {questionText}
                   </span>
                   <div
-                    className={`p-1 rounded-md text-[#777982] transition-transform duration-300 ${
-                      isOpen ? 'rotate-180 text-[#C41E3A]' : ''
+                    className={`p-1 text-[#66666E] transition-transform duration-200 ${
+                      isOpen ? 'rotate-180 text-[#B91C35]' : ''
                     }`}
                   >
                     <ChevronDown className="w-4 h-4" />
@@ -126,7 +125,7 @@ export const FAQSection: React.FC<FAQSectionProps> = ({ currentLang }) => {
                     id={contentId}
                     role="region"
                     aria-labelledby={headerId}
-                    className="px-5 pb-5 pt-1 text-xs sm:text-sm text-[#A1A1AA] leading-relaxed border-t border-[#27292F]/40"
+                    className="px-4 sm:px-5 pb-5 pt-1 text-xs sm:text-sm text-[#929299] leading-relaxed border-t border-[#242428]/40"
                   >
                     {answerText}
                   </div>
@@ -136,7 +135,7 @@ export const FAQSection: React.FC<FAQSectionProps> = ({ currentLang }) => {
           })}
 
           {filteredItems.length === 0 && (
-            <div className="text-center py-12 text-sm text-[#777982]">
+            <div className="text-center py-12 text-xs text-[#66666E]">
               {isAr ? 'لم يتم العثور على نتائج تطابق بحثك.' : 'No matching questions found.'}
             </div>
           )}
